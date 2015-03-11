@@ -1,5 +1,5 @@
 # strapdown-topbar
-a topbar modification for strapdown.js
+A topbar modification for strapdown.js
  
 ## Examples
 Example #1
