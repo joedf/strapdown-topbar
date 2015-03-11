@@ -1,13 +1,20 @@
-﻿// strapdown-topbar.js
+﻿// strapdown-topbar.js v1.0.0
 // by Joe DF, Released under MIT License.
 
+// Revision date: 00:12 2015-03-11
 // Known issue : right-version is reversed
+
+/* HTML Original Template
+<topbar>
+	<item><a href="#">ITEM</a> with HTML</item>
+</topbar>
+*/
 
 /* HTML Result Template
 <div class="navbar-inner">
 	<div class="container">
 		<div id="headline" class="brand">TITLE</div>
-		<div id="headline-item" class="brand">ITEM</div>
+		<div id="headline-item" class="brand">ITEM_HTML</div>
 	</div>
 </div>
 */
