@@ -23,6 +23,7 @@ Have your topbar setting in the `<body>`.
 		<item></item> <!-- add a divider -->
 		<item><a href="#">Item #4</a></item>
 	</menu>
+	<toc>My TOC</toc>
 	<item><small>(Powered by <a href="http://strapdownjs.com/">StrapDown.js</a>)</small></item>
 </topbar>
 ```
