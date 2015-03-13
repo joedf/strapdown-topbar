@@ -1,5 +1,5 @@
 # strapdown-topbar
-A topbar modification for (strapdown.js)[http://strapdownjs.com/]
+A topbar modification for [strapdown.js](http://strapdownjs.com/)
  
 ## Examples
 Example #1
