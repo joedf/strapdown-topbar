@@ -16,6 +16,13 @@ Have your topbar setting in the `<body>`.
 <topbar>
 	<item><a href="#">Home</a></item>
 	<item><a href="#">About</a></item>
+	<menu name="Dropdown Menu">
+		<item><a href="#">Item #1</a></item>
+		<item><a href="#">Item #2</a></item>
+		<item><a href="#">Item #3</a></item>
+		<item></item> <!-- add a divider -->
+		<item><a href="#">Item #4</a></item>
+	</menu>
 	<item><small>(Powered by <a href="http://strapdownjs.com/">StrapDown.js</a>)</small></item>
 </topbar>
 ```
