@@ -1,7 +1,7 @@
-﻿// strapdown-topbar.js v1.4.0
+﻿// strapdown-topbar.js v1.4.1
 // by Joe DF, Released under MIT License.
+// Revision date: 18:16 2015-03-13
 
-// Revision date: 04:47 2015-03-13
 // - ADDED menu toggling for Mobile devices
 // - FIXED Known issue : right-version is reversed
 // - ADDED Dropdown menu support
@@ -9,7 +9,7 @@
 // - ADDED Auto-Anchor Headings
 // - CHANGED to display:inline-block; for Headings
 // - ADDED Simplistic Table of Contents <toc>
-// - Known issue : header anchors are not perfectly leveled
+// - FIXED Known issue : header anchors are not perfectly leveled
 
 /* HTML Original Template
 <topbar right>
@@ -160,32 +160,38 @@
 	for (var i = 1; i < 7; i++) {
 		var headers = document.getElementsByTagName('h'+i);
 		for (var j = 0; j < headers.length; j++) {
-			
 			// Get Header text
 			var innerText = headers[j].innerHTML.replace(/<\/?[^>]+(>|$)/g, ""); // http://stackoverflow.com/a/5002161/883015
 			
-			// Add anchor
-			if(!headers[j].hasAttribute('id')) { // if id anchor not exist, create one
+			// Add/Get anchor
+			var anchorId = '_' + Date.now;
+			if(headers[j].hasAttribute('id')) // if id anchor exists, use it
+			{
+				h_Id = headers[j].getAttribute('id');
+				anchorId = (h_Id.length>0)?h_Id:anchorId;
+				headers[j].removeAttribute('id');
+			}
+			else // if id anchor not exist, create one
+			{
 				var str = innerText.replace(/\s/g, '_'); // replace spaces with _
 				var str = str.replace(/[():.,;'#\[\]\/{}&="|?!]/g, ''); // remove special chars
 				var str = str.toLowerCase(); // convert to lowercase
 				if(!!document.getElementById(str)) // if new id anchor exist already, set it to a unique one
-				headers[j].setAttribute('id', str + '_' + Date.now);
+					anchorId = str + anchorId;
 				else
-				headers[j].setAttribute('id', str);
+					anchorId = str;
 			}
 			// http://stackoverflow.com/a/1763629/883015
 			var anchor = document.createElement('a');
-			var anchorId = headers[j].getAttribute('id');
-			anchor.href = '#' + anchorId;
-			anchor.style = 'text-decoration:none;';
-			anchor.appendChild(headers[j].cloneNode(true));
-			headers[j].parentNode.replaceChild(anchor,headers[j]);
+				anchor.href = '#' + anchorId;
+				anchor.style = 'text-decoration:none;';
+				anchor.innerHTML = '<span id="'+anchorId+'" class="h'+i+'_anchor"></span>'
+				anchor.appendChild(headers[j].cloneNode(true));
+				headers[j].parentNode.replaceChild(anchor,headers[j]);
 			
 			// Show paragraph sign on mouseover
 			headers[j].addEventListener('mouseenter', function(e){
 				var p = document.createElement('span');
-				p.style = 'color:#999;font-size:.7em;position:absolute'; //;font-size:smaller;line-height:unset !important;
 				p.innerHTML = ' &para;'; p.className = 'sd-para-symbol';
 				this.appendChild(p);
 			});
@@ -204,13 +210,29 @@
 	
 	// Add "Back to top" anchor in TOC
 	if (!!toc_c)
-	toc_c.innerHTML = toc_c.innerHTML + '<li class="divider"></li><li><a href="#top">Back to top</a></li>';
+		toc_c.innerHTML = toc_c.innerHTML + '<li class="divider"></li><li><a href="#top">Back to top</a></li>';
 	
 	// Custom Header anchor styling
-	var css = document.createElement("style");
-	css.type = "text/css";
-	css.innerHTML = 'h1,h2,h3,h4,h5,h6{display:inline-block}'
-				  + 'a h1,a h2,a h3,a h4,a h5,a h6{color:#555}'
-				  + 'a h1:hover,a h2:hover,a h3:hover,a h4:hover,a h5:hover,a h6:hover{color:#D9230F}';
-	document.body.appendChild(css);
+	window.onload = function() { //wait for window to load for window.getComputedStyle
+		var haligh_css = '';
+		// Prepare the css for better anchor alignment
+		for (var i = 1; i < 7; i++) {
+			var h_e = document.getElementsByTagName('h'+i)[0];
+			if (!!h_e) {
+				// http://stackoverflow.com/a/15195345/883015
+				var h_fs = parseInt(window.getComputedStyle(h_e,null).getPropertyValue('font-size'),10);
+				var h_lh = parseInt(window.getComputedStyle(h_e,null).getPropertyValue('line-height'),10);
+				haligh_css = haligh_css + '.h'+i+'_anchor{position:relative;top:-'+(h_fs+h_lh)+'px}';
+				//alert("i = "+i+"\ninnerHTML = "+h_e.innerHTML+"\nh_fs = "+h_fs+"\nh_lh = "+h_lh);
+			}
+		}
+		var css = document.createElement("style");
+		css.type = "text/css";
+		css.innerHTML = 'h1,h2,h3,h4,h5,h6{display:inline-block}'
+					  + 'a h1,a h2,a h3,a h4,a h5,a h6{color:#555}'
+					  + 'a h1:hover,a h2:hover,a h3:hover,a h4:hover,a h5:hover,a h6:hover{color:#D9230F}'
+					  + '.sd-para-symbol{color:#999;font-size:.7em;position:absolute}'
+					  + haligh_css;
+		document.body.appendChild(css);
+	}
 })();
