@@ -1,12 +1,15 @@
-﻿// strapdown-topbar.js v1.3.0
+﻿// strapdown-topbar.js v1.4.0
 // by Joe DF, Released under MIT License.
 
-// Revision date: 03:50 2015-03-13
+// Revision date: 04:47 2015-03-13
 // - ADDED menu toggling for Mobile devices
 // - FIXED Known issue : right-version is reversed
 // - ADDED Dropdown menu support
 // - Known issue : dropdowns are not correctly aligned
 // - ADDED Auto-Anchor Headings
+// - CHANGED to display:inline-block; for Headings
+// - ADDED Simplistic Table of Contents <toc>
+// - Known issue : header anchors are not perfectly leveled
 
 /* HTML Original Template
 <topbar right>
@@ -53,13 +56,13 @@
 	var calign = (topbar_tag.hasAttribute('right'))?'right':'left';
 	var css = document.createElement("style");
 	css.type = "text/css";
-	css.innerHTML = '.headline-item,.headline-menu{font-size:14px !important;}.headline-item{text-align:right;}'
-				  + '@media(min-width:980px){.nav > li > a {display:inline !important;padding:0 !important;}}'
+	css.innerHTML = '.headline-item,.headline-menu{font-size:14px!important}.headline-item{text-align:right}'
+				  + '@media(min-width:980px){.nav>li>a{display:inline!important;padding:0!important}}'
 				  + '@media(max-width:979px){'
-				  + 	'#navbar-main{width:100%}.nav > li {float:none !important;padding: 13px 15px 6px !important;display:block;}'
-				  + 	'.nav > li > a {display:block !important;padding:0 !important;}'
-				  + 	'#navbar-main ul{float:'+calign+';}'
-				  + 	'.headline-item{text-align:'+calign+';}'
+				  + 	'#navbar-main{width:100%}.nav>li{float:none!important;padding:13px 15px 6px!important;display:block}'
+				  + 	'.nav>li>a{display:block!important;padding:0!important}'
+				  + 	'#navbar-main ul{float:'+calign+'}'
+				  + 	'.headline-item{text-align:'+calign+'}'
 				  + '}';
 	document.body.appendChild(css);
 	
@@ -117,6 +120,12 @@
 				// Finalize Menu
 				content = content + '</ul></li>';
 				
+			} else if (item.tagName.toUpperCase() == "TOC") { // Prepare <TOC> tag for later processing
+				// Get TOC name
+				var toc_name = (item.innerHTML.length>0)?item.innerHTML:"Contents";
+				content = content + '<li class="dropdown headline-menu brand"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" onclick="dmenu_toggle(this,1)">'+toc_name+' <span class="caret"></span></a><ul class="dropdown-menu" id="strapdown-toc">';
+				// Finalize TOC preparation
+				content = content + '</ul></li>';
 			} else { // Otherwise, process as simple <item> tag
 				content = content + '<li class="headline-item brand">' + item.innerHTML + '</li>';
 			}
@@ -140,16 +149,23 @@
 		}
 	});
 	
+	// Prepare TOC access
+	var toc_c = document.getElementById("strapdown-toc");
+	
 	// Bonus Feature ! - Auto-Anchor Headings
 	// Thanks for Ragnar-F's original code, this is a forked version
 	// Permalink: https://github.com/Ragnar-F/ahk_docs_german/blob/93e17c109ed2739e1953bfdd63941f7d9c5ef0f2/static/content.js#L1413-L1448
+	
+	// Header processing loop
 	for (var i = 1; i < 7; i++) {
 		var headers = document.getElementsByTagName('h'+i);
 		for (var j = 0; j < headers.length; j++) {
 			
+			// Get Header text
+			var innerText = headers[j].innerHTML.replace(/<\/?[^>]+(>|$)/g, ""); // http://stackoverflow.com/a/5002161/883015
+			
 			// Add anchor
 			if(!headers[j].hasAttribute('id')) { // if id anchor not exist, create one
-				var innerText = headers[j].innerHTML.replace(/<\/?[^>]+(>|$)/g, ""); // http://stackoverflow.com/a/5002161/883015
 				var str = innerText.replace(/\s/g, '_'); // replace spaces with _
 				var str = str.replace(/[():.,;'#\[\]\/{}&="|?!]/g, ''); // remove special chars
 				var str = str.toLowerCase(); // convert to lowercase
@@ -160,7 +176,8 @@
 			}
 			// http://stackoverflow.com/a/1763629/883015
 			var anchor = document.createElement('a');
-			anchor.href = '#' + headers[j].getAttribute('id');
+			var anchorId = headers[j].getAttribute('id');
+			anchor.href = '#' + anchorId;
 			anchor.style = 'text-decoration:none;';
 			anchor.appendChild(headers[j].cloneNode(true));
 			headers[j].parentNode.replaceChild(anchor,headers[j]);
@@ -177,13 +194,23 @@
 				for (var k = 0; k < p.length; k++)
 					p[k].parentNode.removeChild(p[k]);
 			});
+			
+			// Add TOC elements
+			if (!!toc_c) {
+				toc_c.innerHTML = toc_c.innerHTML + '<li><a href="#'+anchorId+'">' + innerText + '</a></li>';
+			}
 		}
 	}
 	
-	// Custom styling
+	// Add "Back to top" anchor in TOC
+	if (!!toc_c)
+	toc_c.innerHTML = toc_c.innerHTML + '<li class="divider"></li><li><a href="#top">Back to top</a></li>';
+	
+	// Custom Header anchor styling
 	var css = document.createElement("style");
 	css.type = "text/css";
-	css.innerHTML = 'a h1,a h2,a h3,a h4,a h5,a h6{color:#555;}'
-				  + 'a h1:hover,a h2:hover,a h3:hover,a h4:hover,a h5:hover,a h6:hover{color:#D9230F;}';
+	css.innerHTML = 'h1,h2,h3,h4,h5,h6{display:inline-block}'
+				  + 'a h1,a h2,a h3,a h4,a h5,a h6{color:#555}'
+				  + 'a h1:hover,a h2:hover,a h3:hover,a h4:hover,a h5:hover,a h6:hover{color:#D9230F}';
 	document.body.appendChild(css);
 })();
