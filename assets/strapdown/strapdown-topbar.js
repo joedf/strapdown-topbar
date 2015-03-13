@@ -138,4 +138,51 @@
 				dmenu_toggle(ddown,2);
 		}
 	});
+	
+	// Bonus Feature ! - Auto-Anchor Headings
+	// Thanks for Ragnar-F's original code, this is a forked version
+	// Permalink: https://github.com/Ragnar-F/ahk_docs_german/blob/93e17c109ed2739e1953bfdd63941f7d9c5ef0f2/static/content.js#L1413-L1448
+	for (var i = 1; i < 7; i++) {
+		var headers = document.getElementsByTagName('h'+i);
+		for (var j = 0; j < headers.length; j++) {
+			
+			// Add anchor
+			if(!headers[j].hasAttribute('id')) { // if id anchor not exist, create one
+				var innerText = headers[j].innerHTML.replace(/<\/?[^>]+(>|$)/g, ""); // http://stackoverflow.com/a/5002161/883015
+				var str = innerText.replace(/\s/g, '_'); // replace spaces with _
+				var str = str.replace(/[():.,;'#\[\]\/{}&="|?!]/g, ''); // remove special chars
+				var str = str.toLowerCase(); // convert to lowercase
+				if(!!document.getElementById(str)) // if new id anchor exist already, set it to a unique one
+				headers[j].setAttribute('id', str + '_' + Date.now);
+				else
+				headers[j].setAttribute('id', str);
+			}
+			// http://stackoverflow.com/a/1763629/883015
+			var anchor = document.createElement('a');
+			anchor.href = '#' + headers[j].getAttribute('id');
+			anchor.style = 'text-decoration:none;';
+			anchor.appendChild(headers[j].cloneNode(true));
+			headers[j].parentNode.replaceChild(anchor,headers[j]);
+			
+			// Show paragraph sign on mouseover
+			headers[j].addEventListener('mouseenter', function(e){
+				var p = document.createElement('span');
+				p.style = 'color:#999;font-size:.7em;position:absolute'; //;font-size:smaller;line-height:unset !important;
+				p.innerHTML = ' &para;'; p.className = 'sd-para-symbol';
+				this.appendChild(p);
+			});
+			headers[j].addEventListener('mouseleave', function(e){
+				var p = document.getElementsByClassName('sd-para-symbol');
+				for (var k = 0; k < p.length; k++)
+					p[k].parentNode.removeChild(p[k]);
+			});
+		}
+	}
+	
+	// Custom styling
+	var css = document.createElement("style");
+	css.type = "text/css";
+	css.innerHTML = 'a h1,a h2,a h3,a h4,a h5,a h6{color:#555;}'
+				  + 'a h1:hover,a h2:hover,a h3:hover,a h4:hover,a h5:hover,a h6:hover{color:#D9230F;}';
+	document.body.appendChild(css);
 })();
