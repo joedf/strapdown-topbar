@@ -8,7 +8,7 @@
 // - Known issue : dropdowns are not correctly aligned
 
 /* HTML Original Template
-<topbar>
+<topbar right>
 	<item><a href="#">ITEM</a> with HTML</item>
 	<menu name="Dropdown Menu">
 		<item><a href="#">ITEM</a> with HTML</item>
