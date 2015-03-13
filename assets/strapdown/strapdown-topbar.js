@@ -1,11 +1,12 @@
-﻿// strapdown-topbar.js v1.2.0
+﻿// strapdown-topbar.js v1.3.0
 // by Joe DF, Released under MIT License.
 
-// Revision date: 00:32 2015-03-13
+// Revision date: 03:50 2015-03-13
 // - ADDED menu toggling for Mobile devices
 // - FIXED Known issue : right-version is reversed
 // - ADDED Dropdown menu support
 // - Known issue : dropdowns are not correctly aligned
+// - ADDED Auto-Anchor Headings
 
 /* HTML Original Template
 <topbar right>
