@@ -1,10 +1,11 @@
-﻿// strapdown-topbar.js v1.4.1
+﻿// strapdown-topbar.js v1.4.2
 // by Joe DF, Released under MIT License.
-// Revision date: 18:16 2015-03-13
+// Revision date: 18:46 2015-03-13
 
 // - ADDED menu toggling for Mobile devices
 // - FIXED Known issue : right-version is reversed
 // - ADDED Dropdown menu support
+// - FIXED Known issue : dropdowns anchor not correctly text-aligned
 // - Known issue : dropdowns are not correctly aligned
 // - ADDED Auto-Anchor Headings
 // - CHANGED to display:inline-block; for Headings
@@ -24,7 +25,7 @@
 /* HTML Result Template
 <div class="navbar-inner">
 	<div class="container">
-		<a href="javascript:;" class="btn btn-navbar" data-toggle="collapse" data-target="#navbar-main" id="navbar-main-btn" onclick="nbar_toggle()>
+		<a href="javascript:;" class="btn btn-navbar" data-toggle="collapse" data-target="#navbar-main" onclick="nbar_toggle()>
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
@@ -62,7 +63,7 @@
 				  + 	'#navbar-main{width:100%}.nav>li{float:none!important;padding:13px 15px 6px!important;display:block}'
 				  + 	'.nav>li>a{display:block!important;padding:0!important}'
 				  + 	'#navbar-main ul{float:'+calign+'}'
-				  + 	'.headline-item{text-align:'+calign+'}'
+				  + 	'.headline-item,.dropdown-toggle{text-align:'+calign+'}'
 				  + '}';
 	document.body.appendChild(css);
 	
@@ -90,7 +91,7 @@
 	
 	// Insert the Title and Menu
 	var content = '<div class="navbar-inner"><div class="container"><div id="headline" class="brand">'+doctitle+'</div>'
-				+ '<a href="javascript:;" class="btn btn-navbar" data-toggle="collapse" data-target="#navbar-main" id="navbar-main-btn" onclick="nbar_toggle()">'
+				+ '<a href="javascript:;" class="btn btn-navbar" data-toggle="collapse" data-target="#navbar-main" onclick="nbar_toggle()">'
 				+ '<span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a>'
 				+ '<div class="nav-collapse collapse navbar-responsive-collapse pull-'+calign+'" id="navbar-main"><ul class="nav navbar-nav navbar-right">';
 
