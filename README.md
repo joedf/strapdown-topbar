@@ -30,5 +30,5 @@ Then, simply include `strapdown-topbar.js` **AFTER** `strapdown.js`.
 ```HTML
 <script src="http://strapdownjs.com/v/0.2/strapdown.js"></script>
 <!-- Include it AFTER strapdown -->
-<script src="assets/strapdown/strapdown-topbar.js"></script>
+<script src="assets/strapdown/strapdown-topbar.min.js"></script>
 ```
