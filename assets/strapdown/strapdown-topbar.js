@@ -1,6 +1,6 @@
-﻿// strapdown-topbar.js v1.4.2
+﻿// strapdown-topbar.js v1.4.3
 // by Joe DF, Released under MIT License.
-// Revision date: 18:46 2015-03-13
+// Revision date: 15:14 2015-05-28
 
 // - ADDED menu toggling for Mobile devices
 // - FIXED Known issue : right-version is reversed
@@ -11,6 +11,7 @@
 // - CHANGED to display:inline-block; for Headings
 // - ADDED Simplistic Table of Contents <toc>
 // - FIXED Known issue : header anchors are not perfectly leveled
+// - ADDED ID to topbar container : `id="topbar"` for easier custom-js handling
 
 /* HTML Original Template
 <topbar right>
@@ -90,7 +91,7 @@
 	document.body.appendChild(menucode);
 	
 	// Insert the Title and Menu
-	var content = '<div class="navbar-inner"><div class="container"><div id="headline" class="brand">'+doctitle+'</div>'
+	var content = '<div class="navbar-inner"><div class="container" id="topbar"><div id="headline" class="brand">'+doctitle+'</div>'
 				+ '<a href="javascript:;" class="btn btn-navbar" data-toggle="collapse" data-target="#navbar-main" onclick="nbar_toggle()">'
 				+ '<span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a>'
 				+ '<div class="nav-collapse collapse navbar-responsive-collapse pull-'+calign+'" id="navbar-main"><ul class="nav navbar-nav navbar-right">';
