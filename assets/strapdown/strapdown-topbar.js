@@ -1,6 +1,6 @@
-﻿// strapdown-topbar.js v1.4.3
+﻿// strapdown-topbar.js v1.4.4
 // by Joe DF, Released under MIT License.
-// Revision date: 15:14 2015-05-28
+// Revision date: 03:05 2015-07-23
 
 // - ADDED menu toggling for Mobile devices
 // - FIXED Known issue : right-version is reversed
@@ -12,6 +12,7 @@
 // - ADDED Simplistic Table of Contents <toc>
 // - FIXED Known issue : header anchors are not perfectly leveled
 // - ADDED ID to topbar container : `id="topbar"` for easier custom-js handling
+// - ADDED fix for Google Chrome, etc: for the missing "String.contains()" function
 
 /* HTML Original Template
 <topbar right>
@@ -49,6 +50,9 @@
 */
 
 ;(function(){
+	//http://stackoverflow.com/a/1978419/883015
+	if (typeof String.prototype.contains === 'undefined') { String.prototype.contains = function(it) { return this.indexOf(it) != -1; }; }
+
 	var doctitle = document.title.toString();
 	var topbar = document.getElementsByClassName('navbar navbar-fixed-top')[0];
 	var topbar_tag = document.getElementsByTagName('topbar')[0];
