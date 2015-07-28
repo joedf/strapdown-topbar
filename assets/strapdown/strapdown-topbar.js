@@ -1,6 +1,6 @@
-﻿// strapdown-topbar.js v1.4.4
+﻿// strapdown-topbar.js v1.5.0
 // by Joe DF, Released under MIT License.
-// Revision date: 03:05 2015-07-23
+// Revision date: 16:17 2015-07-28
 
 // - ADDED menu toggling for Mobile devices
 // - FIXED Known issue : right-version is reversed
@@ -13,6 +13,7 @@
 // - FIXED Known issue : header anchors are not perfectly leveled
 // - ADDED ID to topbar container : `id="topbar"` for easier custom-js handling
 // - ADDED fix for Google Chrome, etc: for the missing "String.contains()" function
+// - ADDED option : topbar fixed on mobile devices, 'mfixed' attribute
 
 /* HTML Original Template
 <topbar right>
@@ -70,6 +71,10 @@
 				  + 	'#navbar-main ul{float:'+calign+'}'
 				  + 	'.headline-item,.dropdown-toggle{text-align:'+calign+'}'
 				  + '}';
+	// Make topbar fixed on mobile devices (optional)
+	if (topbar_tag.hasAttribute('mfixed')) {
+		css.innerHTML = css.innerHTML + '.navbar-fixed-top{position: fixed !important;margin-right: 0 !important;margin-left: 0 !important;}';
+	}
 	document.body.appendChild(css);
 	
 	// Add in custom menu-toggle js code
