@@ -1,6 +1,6 @@
-﻿// strapdown-topbar.js v1.5.1
+﻿// strapdown-topbar.js v1.5.2
 // by Joe DF, Released under MIT License.
-// Revision date: 16:42 2015-07-28
+// Revision date: 15:00 2015-09-04
 
 // - ADDED menu toggling for Mobile devices
 // - FIXED Known issue : right-version is reversed
@@ -15,6 +15,7 @@
 // - ADDED fix for Google Chrome, etc: for the missing "String.contains()" function
 // - ADDED option : topbar fixed on mobile devices, 'mfixed' attribute
 // - FIXED content alignment --> fixed bug from v1.5.0
+// - FIXED Header anchors not being correctly 'valigned' in browsers other than Mozilla Firefox
 
 /* HTML Original Template
 <topbar right>
@@ -237,9 +238,10 @@
 			if (!!h_e) {
 				// http://stackoverflow.com/a/15195345/883015
 				var h_fs = parseInt(window.getComputedStyle(h_e,null).getPropertyValue('font-size'),10);
-				var h_lh = parseInt(window.getComputedStyle(h_e,null).getPropertyValue('line-height'),10);
-				haligh_css = haligh_css + '.h'+i+'_anchor{position:relative;top:-'+(h_fs+h_lh)+'px}';
-				//alert("i = "+i+"\ninnerHTML = "+h_e.innerHTML+"\nh_fs = "+h_fs+"\nh_lh = "+h_lh);
+				//var h_lh = parseInt(window.getComputedStyle(h_e,null).getPropertyValue('line-height'),10);
+				//haligh_css = haligh_css + '.h'+i+'_anchor{position:relative;display:block;top:-'+(h_fs+h_lh)+'px}';
+				haligh_css = haligh_css + '.h'+i+'_anchor{position:relative;display:block;top:-'+(h_fs+7)+'px}';
+				//alert('fs: '+h_fs+'\nlh: '+h_lh);
 			}
 		}
 		var css = document.createElement("style");

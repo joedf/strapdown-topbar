@@ -10,6 +10,10 @@ Example #2
 _Right aligned top links_
 http://joedf.github.io/strapdown-topbar/template-right.html
   
+Example MFixed
+_Fixed topbar on mobile devices_
+http://joedf.github.io/strapdown-topbar/template-mfixed.html
+  
 ## Usage
 Have your topbar setting in the `<body>`.
 ```HTML
