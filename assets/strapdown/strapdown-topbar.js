@@ -1,6 +1,6 @@
-﻿// strapdown-topbar.js v1.5.3
+﻿// strapdown-topbar.js v1.5.4
 // by Joe DF, Released under MIT License.
-// Revision date: 17:03 2015-09-04
+// Revision date: 15:05 2015-09-14
 
 // - ADDED menu toggling for Mobile devices
 // - FIXED Known issue : right-version is reversed
@@ -18,40 +18,7 @@
 // - FIXED Header anchors not being correctly 'valigned' in browsers other than Mozilla Firefox
 // - FIXED ported v1.5.2 fix to mobile devices
 
-/* HTML Original Template
-<topbar right>
-	<item><a href="#">ITEM</a> with HTML</item>
-	<menu name="Dropdown Menu">
-		<item><a href="#">ITEM</a> with HTML</item>
-		<item></item> <!-- add a divider -->
-	</menu>
-</topbar>
-*/
-
-/* HTML Result Template
-<div class="navbar-inner">
-	<div class="container">
-		<a href="javascript:;" class="btn btn-navbar" data-toggle="collapse" data-target="#navbar-main" onclick="nbar_toggle()>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-		</a>
-		<div id="headline" class="brand">TITLE</div>
-		<div class="nav-collapse collapse navbar-responsive-collapse pull-right" id="navbar-main">
-			<ul class="nav navbar-nav navbar-right">
-				<li class="headline-item brand">ITEM_HTML</li>
-				<li class="dropdown headline-menu brand">
-					<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" onclick="dmenu_toggle(this)">MENUNAME <span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li>ITEM_HTML</li>
-						<li class="divider"></li>
-					</ul>
-				</li>
-			</ul>
-		</div>
-	</div>
-</div>
-*/
+///////////////////////////////////////////////////////////////////////////
 
 ;(function(){
 	//http://stackoverflow.com/a/1978419/883015
@@ -233,6 +200,8 @@
 	// Custom Header anchor styling
 	window.onload = function() { //wait for window to load for window.getComputedStyle
 		var haligh_css = '';
+		var mfixed_offset = (topbar_tag.hasAttribute('mfixed'))?60:0;
+
 		// Prepare the css for better anchor alignment
 		for (var i = 1; i < 7; i++) {
 			var h_e = document.getElementsByTagName('h'+i)[0];
@@ -242,8 +211,8 @@
 				var h_lh = parseInt(window.getComputedStyle(h_e,null).getPropertyValue('line-height'),10);
 				
 				haligh_css = haligh_css + '.h'+i+'_anchor{position:relative;display:block;top:-'+(h_fs+7)+'px}';
-				haligh_css = haligh_css + '@media(max-width:979px){.h'+i+'_anchor{position:relative;display:inline;top:-'+(h_fs+h_lh)+'px}}';
-				
+				haligh_css = haligh_css + '@media(max-width:979px){.h'+i+'_anchor{position:relative;display:inline;top:-'+(h_fs+h_lh+mfixed_offset)+'px}}';
+
 				//alert('fs: '+h_fs+'\nlh: '+h_lh);
 			}
 		}
