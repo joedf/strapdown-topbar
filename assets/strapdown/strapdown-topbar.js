@@ -1,6 +1,6 @@
-﻿// strapdown-topbar.js v1.5.4
+﻿// strapdown-topbar.js v1.5.5
 // by Joe DF, Released under MIT License.
-// Revision date: 15:05 2015-09-14
+// Revision date: 09:12 2015-09-25
 
 // - ADDED menu toggling for Mobile devices
 // - FIXED Known issue : right-version is reversed
@@ -17,6 +17,7 @@
 // - FIXED content alignment --> fixed bug from v1.5.0
 // - FIXED Header anchors not being correctly 'valigned' in browsers other than Mozilla Firefox
 // - FIXED ported v1.5.2 fix to mobile devices
+// - FIXED Header alignments iOS vs Android
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -200,7 +201,10 @@
 	// Custom Header anchor styling
 	window.onload = function() { //wait for window to load for window.getComputedStyle
 		var haligh_css = '';
-		var mfixed_offset = (topbar_tag.hasAttribute('mfixed'))?60:0;
+		var mfixed_offset = (topbar_tag.hasAttribute('mfixed'))?50:0;
+		var iOS = /iPad|iPhone|iPod/.test(navigator.platform);
+		if (iOS)
+			mfixed_offset = 5;
 
 		// Prepare the css for better anchor alignment
 		for (var i = 1; i < 7; i++) {
@@ -210,8 +214,8 @@
 				var h_fs = parseInt(window.getComputedStyle(h_e,null).getPropertyValue('font-size'),10);
 				var h_lh = parseInt(window.getComputedStyle(h_e,null).getPropertyValue('line-height'),10);
 				
-				haligh_css = haligh_css + '.h'+i+'_anchor{position:relative;display:block;top:-'+(h_fs+7)+'px}';
-				haligh_css = haligh_css + '@media(max-width:979px){.h'+i+'_anchor{position:relative;display:inline;top:-'+(h_fs+h_lh+mfixed_offset)+'px}}';
+				haligh_css = haligh_css + '.h'+i+'_anchor{position:relative;display:inline-block;top:-'+(h_fs+7+(h_lh))+'px}';
+				haligh_css = haligh_css + '@media(max-width:979px){.h'+i+'_anchor{position:relative;display:inline-block;top:-'+(h_fs+7+mfixed_offset)+'px}}';
 
 				//alert('fs: '+h_fs+'\nlh: '+h_lh);
 			}
