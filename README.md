@@ -38,6 +38,6 @@ Then, simply include `strapdown-topbar.js` **AFTER** `strapdown.js`.
 <script src="assets/strapdown/strapdown-topbar.min.js"></script>
 
 <!-- Example: Manually adding a logo -->
-<!----------- Include it AFTER EVERYTHING -->
+<!-- Include it AFTER EVERYTHING -->
 <script src="assets/logo.js"></script>
 ```
