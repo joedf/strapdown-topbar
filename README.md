@@ -17,7 +17,7 @@ http://joedf.github.io/strapdown-topbar/template-mfixed.html
 ## Usage
 Have your topbar setting in the `<body>`.
 ```HTML
-<topbar>
+<topbar style="display:none;">
 	<item><a href="#">Home</a></item>
 	<item><a href="#">About</a></item>
 	<menu name="Dropdown Menu">
