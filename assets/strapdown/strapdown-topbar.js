@@ -1,6 +1,6 @@
-﻿// strapdown-topbar.js v1.5.6
+﻿// strapdown-topbar.js v1.6.0
 // by Joe DF, Released under MIT License.
-// Revision date: 22:02 2015-09-29
+// Revision date: 19:43 2015-10-14
 
 // - ADDED menu toggling for Mobile devices
 // - FIXED Known issue : right-version is reversed
@@ -20,6 +20,7 @@
 // - FIXED Header alignments iOS vs Android
 // - FIXED unique anchor for same name header links
 // - FIXED iOS specific header links alignment
+// - ADDED "Smart" auto-collapse for mobile devices
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -56,10 +57,10 @@
 	
 	// Add in custom menu-toggle js code
 	var menucode = document.createElement("script");
-	menucode.innerHTML = 'function nbar_toggle(){'
+	menucode.innerHTML = 'function nbar_toggle(x){'
 					   + 	'var nbar=document.getElementById("navbar-main");'
 					   + 	'var nbar_t=nbar.className;'
-					   + 	'if(nbar_t.indexOf("collapse")>-1){'
+					   + 	'if((nbar_t.indexOf("collapse")>-1)&&(x!=2)){'
 					   + 		'nbar.className=nbar.className.replace(/collapse/g,"open");'
 					   + 	'}else{'
 					   + 		'nbar.className=nbar.className.replace(/open/g,"collapse");'
@@ -130,10 +131,28 @@
 	// Add handler : Hide Dropdowns when clicking outside
 	document.documentElement.addEventListener('mouseup', function(e){
 		var ddowns = document.getElementsByClassName("dropdown");
+		var nbar = document.getElementById('topbar');
 		for (var i = 0; i < ddowns.length; i++) {
 			var ddown = ddowns[i];
-			if (!ddown.contains(e.target)) 
-				dmenu_toggle(ddown,2);
+			var ddown_m = ddown.getElementsByClassName('dropdown-menu')[0];
+
+			var c_do = ddown.contains(e.target);
+
+			if (screen.width <= 980) { // on mobile
+				var c_nm = nbar.contains(e.target);
+				var c_dm = ddown_m.contains(e.target);
+ 				if ( !c_nm || c_dm ) {
+					dmenu_toggle(ddown,2);
+					nbar_toggle(2);
+				} else
+				if ( !c_do ) {
+					dmenu_toggle(ddown,2);
+				}
+			} else {
+				if ( !c_do ) {
+					dmenu_toggle(ddown,2);
+				}
+			}
 		}
 	});
 	
