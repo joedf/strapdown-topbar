@@ -1,6 +1,6 @@
-﻿// strapdown-topbar.js v1.6.0
+﻿// strapdown-topbar.js v1.6.1
 // by Joe DF, Released under MIT License.
-// Revision date: 19:43 2015-10-14
+// Revision date: 21:34 2016-01-19
 
 // - ADDED menu toggling for Mobile devices
 // - FIXED Known issue : right-version is reversed
@@ -21,6 +21,7 @@
 // - FIXED unique anchor for same name header links
 // - FIXED iOS specific header links alignment
 // - ADDED "Smart" auto-collapse for mobile devices
+// - ADDED automatic vertical scrollbar when dropdown menus are taller than 550px
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -44,7 +45,11 @@
 				  + 	'.nav>li>a{display:block!important;padding:0!important}'
 				  + 	'#navbar-main ul{float:'+calign+'}'
 				  + 	'.headline-item,.dropdown-toggle{text-align:'+calign+'}'
-				  + '}';
+				  + '}'
+				  // following line currently not needed
+				  //+ '.open .dropdown-menu{display:block !important}' //less restrictive than default (that uses '>')
+				  + '.dropdown-menu > ul{overflow-y:auto;max-height:550px}' //adds scroll for extra long dropdown menus
+				  + '.dropdown-menu > ul{list-style:none !important;margin:0 !important}'; //added (new) to fix div-wrapped ul 'dropdown-menu'
 	// Make topbar fixed on mobile devices (optional)
 	if (topbar_tag.hasAttribute('mfixed')) {
 		css.innerHTML = css.innerHTML 
@@ -93,7 +98,7 @@
 				var menu_name = item.hasAttribute("name")?item.getAttribute("name"):"Menu"; menu_name = (menu_name.length>0)?menu_name:"Menu";
 				
 				// Prepare Dropdown for the Menu
-				content = content + '<li class="dropdown headline-menu brand"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" onclick="dmenu_toggle(this,1)">'+menu_name+' <span class="caret"></span></a><ul class="dropdown-menu">';
+				content = content + '<li class="dropdown headline-menu brand"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" onclick="dmenu_toggle(this,1)">'+menu_name+' <span class="caret"></span></a><div class="dropdown-menu"><ul>';
 				
 				// Sub-level processing loop, add Dropdown items
 				menu_items = item.getElementsByTagName('item');
@@ -107,14 +112,14 @@
 				}
 				
 				// Finalize Menu
-				content = content + '</ul></li>';
+				content = content + '</ul></div></li>';
 				
 			} else if (item.tagName.toUpperCase() == "TOC") { // Prepare <TOC> tag for later processing
 				// Get TOC name
 				var toc_name = (item.innerHTML.length>0)?item.innerHTML:"Contents";
-				content = content + '<li class="dropdown headline-menu brand"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" onclick="dmenu_toggle(this,1)">'+toc_name+' <span class="caret"></span></a><ul class="dropdown-menu" id="strapdown-toc">';
+				content = content + '<li class="dropdown headline-menu brand"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" onclick="dmenu_toggle(this,1)">'+toc_name+' <span class="caret"></span></a><div class="dropdown-menu"><ul id="strapdown-toc">';
 				// Finalize TOC preparation
-				content = content + '</ul></li>';
+				content = content + '</ul></div></li>';
 			} else { // Otherwise, process as simple <item> tag
 				content = content + '<li class="headline-item brand">' + item.innerHTML + '</li>';
 			}
