@@ -1,6 +1,6 @@
-﻿// strapdown-topbar.js v1.6.1
+﻿// strapdown-topbar.js v1.6.3
 // by Joe DF, Released under MIT License.
-// Revision date: 21:34 2016-01-19
+// Revision date: 23:21 2016-01-21
 
 // - ADDED menu toggling for Mobile devices
 // - FIXED Known issue : right-version is reversed
@@ -22,6 +22,9 @@
 // - FIXED iOS specific header links alignment
 // - ADDED "Smart" auto-collapse for mobile devices
 // - ADDED automatic vertical scrollbar when dropdown menus are taller than 550px
+// - FIXED a regression of unwanted space in dropdown-menu (left of) items
+// - FIXED (most) wide menus from going out of the screen on mobile
+// - ADDED Auto-ellipse text (@ 42 chars) in auto-generated Table of Contents
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -45,11 +48,11 @@
 				  + 	'.nav>li>a{display:block!important;padding:0!important}'
 				  + 	'#navbar-main ul{float:'+calign+'}'
 				  + 	'.headline-item,.dropdown-toggle{text-align:'+calign+'}'
+				  + 	'div.dropdown-menu{left:unset;right:0}' //fix (most) wide menus from going out of the screen on mobile
 				  + '}'
 				  // following line currently not needed
 				  //+ '.open .dropdown-menu{display:block !important}' //less restrictive than default (that uses '>')
-				  + '.dropdown-menu > ul{overflow-y:auto;max-height:550px}' //adds scroll for extra long dropdown menus
-				  + '.dropdown-menu > ul{list-style:none !important;margin:0 !important}'; //added (new) to fix div-wrapped ul 'dropdown-menu'
+				  + '.dropdown-menu > ul{width:100%;overflow-y:auto;max-height:550px;list-style:none !important;margin:0 !important}';
 	// Make topbar fixed on mobile devices (optional)
 	if (topbar_tag.hasAttribute('mfixed')) {
 		css.innerHTML = css.innerHTML 
@@ -160,7 +163,16 @@
 			}
 		}
 	});
-	
+
+	//modified from: https://software.intel.com/en-us/html5/hub/blogs/ellipse-my-text/
+	function ellipse(text, maxLength) {
+		var ret = text;
+		if (ret.length > maxLength) {
+			ret = ret.substr(0,maxLength-3) + "...";
+		}
+		return ret;
+	}
+
 	// Prepare TOC access
 	var toc_c = document.getElementById("strapdown-toc");
 	
@@ -215,7 +227,7 @@
 			
 			// Add TOC elements
 			if (!!toc_c) {
-				toc_c.innerHTML = toc_c.innerHTML + '<li><a href="#'+anchorId+'">' + innerText + '</a></li>';
+				toc_c.innerHTML = toc_c.innerHTML + '<li><a href="#'+anchorId+'">' + ellipse(innerText,42) + '</a></li>';
 			}
 		}
 	}
