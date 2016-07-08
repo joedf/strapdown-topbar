@@ -1,6 +1,6 @@
 # strapdown-topbar
 A topbar modification for [strapdown.js](http://strapdownjs.com/) (markdown-based webpages)  
-![cdnjs-ready](https://img.shields.io/badge/cdnjs-ready-brightgreen.svg) ![mobile-ready](https://img.shields.io/badge/mobile-ready-blue.svg)
+[![cdnjs-ready](https://img.shields.io/badge/cdnjs-ready-brightgreen.svg)](https://cdnjs.com/libraries/strapdown-topbar) [![mobile-ready](https://img.shields.io/badge/mobile-ready-blue.svg)](https://github.com/joedf/strapdown-topbar/releases/latest)
  
 ## Examples
 - Example #1: _Left aligned top links_ [[link]](http://joedf.github.io/strapdown-topbar/template.html)
