@@ -1,5 +1,6 @@
 # strapdown-topbar
-A topbar modification for [strapdown.js](http://strapdownjs.com/)
+A topbar modification for [strapdown.js](http://strapdownjs.com/) (markdown-based webpages)  
+![cdnjs-ready](https://img.shields.io/badge/cdnjs-ready-brightgreen.svg) ![mobile-ready](https://img.shields.io/badge/mobile-ready-blue.svg)
  
 ## Examples
 - Example #1: _Left aligned top links_ [[link]](http://joedf.github.io/strapdown-topbar/template.html)
@@ -33,4 +34,4 @@ Then, simply include `strapdown-topbar.js` **AFTER** `strapdown.js`.
 <!-- Include it AFTER EVERYTHING -->
 <script src="assets/logo.js"></script>
 ```
-**NOTE!** Now available on [cdnjs](https://cdnjs.com/libraries/strapdown-topbar)
+**NOTE!** Want more speed? Now available on [cdnjs](https://cdnjs.com/libraries/strapdown-topbar)
