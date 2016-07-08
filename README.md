@@ -2,17 +2,9 @@
 A topbar modification for [strapdown.js](http://strapdownjs.com/)
  
 ## Examples
-Example #1
-_Left aligned top links_
-http://joedf.github.io/strapdown-topbar/template.html
-  
-Example #2
-_Right aligned top links_
-http://joedf.github.io/strapdown-topbar/template-right.html
-  
-Example MFixed
-_Fixed topbar on mobile devices_
-http://joedf.github.io/strapdown-topbar/template-mfixed.html
+- Example #1: _Left aligned top links_ [[link]](http://joedf.github.io/strapdown-topbar/template.html)
+- Example #2: _Right aligned top links_ [[link]](http://joedf.github.io/strapdown-topbar/template-right.html)
+- Example #3: (MFixed) _Fixed topbar on mobile devices_ [[link]](http://joedf.github.io/strapdown-topbar/template-mfixed.html)
   
 ## Usage
 Have your topbar setting in the `<body>`.
@@ -41,3 +33,4 @@ Then, simply include `strapdown-topbar.js` **AFTER** `strapdown.js`.
 <!-- Include it AFTER EVERYTHING -->
 <script src="assets/logo.js"></script>
 ```
+**NOTE!** Now available on [cdnjs](https://cdnjs.com/libraries/strapdown-topbar)
