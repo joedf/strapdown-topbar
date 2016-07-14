@@ -6,6 +6,8 @@ A topbar modification for [strapdown.js](http://strapdownjs.com/) (markdown-base
 - Example #1: _Left aligned top links_ [[link]](http://joedf.github.io/strapdown-topbar/template.html)
 - Example #2: _Right aligned top links_ [[link]](http://joedf.github.io/strapdown-topbar/template-right.html)
 - Example #3: (MFixed) _Fixed topbar on mobile devices_ [[link]](http://joedf.github.io/strapdown-topbar/template-mfixed.html)
+- Example #4: _Testing Header anchor v-alignment_ [[link]](http://joedf.github.io/strapdown-topbar/header-test.html)
+- Example #5: (MFixed) _Testing Header anchor v-alignment_ [[link]](http://joedf.github.io/strapdown-topbar/header-test-mfixed.html)
   
 ## Usage
 Have your topbar setting in the `<body>`.

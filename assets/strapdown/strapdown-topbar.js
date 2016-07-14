@@ -1,6 +1,6 @@
-﻿// strapdown-topbar.js v1.6.3
+﻿// strapdown-topbar.js v1.6.4
 // by Joe DF, Released under MIT License.
-// Revision date: 23:21 2016-01-21
+// Revision date: 12:44 2016-07-14
 
 // - ADDED menu toggling for Mobile devices
 // - FIXED Known issue : right-version is reversed
@@ -25,6 +25,7 @@
 // - FIXED a regression of unwanted space in dropdown-menu (left of) items
 // - FIXED (most) wide menus from going out of the screen on mobile
 // - ADDED Auto-ellipse text (@ 42 chars) in auto-generated Table of Contents
+// - FIXED Header anchor alignments for beyond h3+
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -239,14 +240,15 @@
 	// Custom Header anchor styling
 	window.onload = function() { //wait for window to load for window.getComputedStyle
 		var haligh_css = '';
-		var mfixed_offset = (topbar_tag.hasAttribute('mfixed'))?50:0;
+		var topbar_h = 50;
+		var mfixed_offset = (topbar_tag.hasAttribute('mfixed'))?topbar_h:0;
 		var iOS = /iPad|iPhone|iPod/.test(navigator.platform);
 		var mfx_bType = 'inline-block';
 		if (iOS) {
 			if (topbar_tag.hasAttribute('mfixed'))
 				mfixed_offset = 5;
 			else {
-				mfixed_offset = -45;
+				mfixed_offset = 5 - topbar_h;
 				mfx_bType = 'inline';
 			}
 		}
@@ -258,11 +260,11 @@
 				// http://stackoverflow.com/a/15195345/883015
 				var h_fs = parseInt(window.getComputedStyle(h_e,null).getPropertyValue('font-size'),10);
 				var h_lh = parseInt(window.getComputedStyle(h_e,null).getPropertyValue('line-height'),10);
+				var h_oh = parseInt(h_e.offsetHeight,10);
 				
-				haligh_css = haligh_css + '.h'+i+'_anchor{position:relative;display:inline-block;top:-'+(h_fs+7+(h_lh))+'px}';
+				_aoffset = h_fs+topbar_h+(h_oh-h_lh);
+				haligh_css = haligh_css + '.h'+i+'_anchor{position:relative;display:inline-block;top:-'+(_aoffset)+'px}';
 				haligh_css = haligh_css + '@media(max-width:979px){.h'+i+'_anchor{position:relative;display:'+mfx_bType+';top:-'+(h_fs+7+mfixed_offset)+'px}}';
-
-				//alert('fs: '+h_fs+'\nlh: '+h_lh);
 			}
 		}
 		var css = document.createElement("style");
