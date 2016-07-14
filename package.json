@@ -1,7 +1,7 @@
 {
   "name": "strapdown-topbar",
   "filename": "strapdown-topbar.min.js",
-  "version": "1.6.3",
+  "version": "1.6.4",
   "description": "a topbar modification for strapdown.js",
   "homepage": "http://joedf.github.io/strapdown-topbar",
   "keywords": [
