@@ -85,9 +85,9 @@ function setthemebar_selected(t) {
 	for (i = 0; i < elems.length; i++) {
 		z = elems[i].innerHTML;
 		if (z.indexOf(t) >= 0) {
-			z[15].style.backgroundColor = "black";
-			z[15].style.color = "white";
-			z[15].style.fontWeight = 600;
+			elems[15].style.backgroundColor = "black";
+			elems[15].style.color = "white";
+			elems[15].style.fontWeight = 600;
 			return 1;
 		}
 	}
@@ -99,9 +99,9 @@ function setthemebar_unselected(t) {
 	for (i = 0; i < elems.length; i++) {
 		z = elems[i].innerHTML;
 		if (z.indexOf(t) >= 0) {
-			z[15].style.backgroundColor = "unset";
-			z[15].style.color = "unset";
-			z[15].style.fontWeight = "unset";
+			elems[15].style.backgroundColor = "unset";
+			elems[15].style.color = "unset";
+			elems[15].style.fontWeight = "unset";
 			return 1;
 		}
 	}
