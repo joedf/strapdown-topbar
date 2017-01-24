@@ -111,7 +111,7 @@ function setthemebar_unselected(t) {
 function getcurrenttheme() {
 	var t = getCookie("theme");
 	var ts = themelist();
-	if (themes.indexOf(t) > -1) {
+	if (ts.indexOf(t) > -1) {
 		return t;
 	} else {
 		return getdefaulttheme();
