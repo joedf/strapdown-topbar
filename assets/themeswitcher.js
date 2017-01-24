@@ -34,7 +34,7 @@ function checkCookie() {
 
 function themeswitcher(autorun) {
 	var theme = getCookie("theme");
-	var default_t = "simplex";
+	var default_t = getdefaulttheme();
 	setthemebar();
 	
 	if (theme.indexOf(default_t) == -1)
@@ -55,7 +55,10 @@ function settheme(t) {
 	var themes = themelist();
 	if (themes.indexOf(t) > -1) {
 		stylesheet.href = 'http://strapdownjs.com/v/0.2/themes/'+t+'.min.css';
+		old_t = getcurrenttheme();
+		setthemebar_unselected(old_t);
 		setCookie("theme",t,cookielife);
+		setthemebar_selected(t);
 		return 1;
 	} else
 		return 0;
@@ -75,6 +78,48 @@ function setthemebar() {
 	}
 	tc.innerHTML = r;
 	return (r.length > 0);
+}
+
+function setthemebar_selected(t) {
+	elems = document.getElementsByTagName('a');
+	for (i = 0; i < elems.length; i++) {
+		z = elems[i].innerHTML;
+		if (z.indexOf(t) >= 0) {
+			z[15].style.backgroundColor = "black";
+			z[15].style.color = "white";
+			z[15].style.fontWeight = 600;
+			return 1;
+		}
+	}
+	return 0;
+}
+
+function setthemebar_unselected(t) {
+	elems = document.getElementsByTagName('a');
+	for (i = 0; i < elems.length; i++) {
+		z = elems[i].innerHTML;
+		if (z.indexOf(t) >= 0) {
+			z[15].style.backgroundColor = "unset";
+			z[15].style.color = "unset";
+			z[15].style.fontWeight = "unset";
+			return 1;
+		}
+	}
+	return 0;
+}
+
+function getcurrenttheme() {
+	var t = getCookie("theme");
+	var ts = themelist();
+	if (themes.indexOf(t) > -1) {
+		return t;
+	} else {
+		return getdefaulttheme();
+	}
+}
+
+function getdefaulttheme() {
+	return "simplex";
 }
 
 ;(function(){
