@@ -54,7 +54,7 @@ function settheme(t) {
 	}
 	var themes = themelist();
 	if (themes.indexOf(t) > -1) {
-		stylesheet.href = 'http://strapdownjs.com/v/0.2/themes/'+t+'.min.css';
+		stylesheet.href = 'assets/strapdown/v/0.2/themes/'+t+'.min.css';
 		old_t = getcurrenttheme();
 		setthemebar_unselected(old_t);
 		setCookie("theme",t,cookielife);
