@@ -37,4 +37,5 @@ Then, simply include `strapdown-topbar.js` **AFTER** `strapdown.js`.
 <!-- Include it AFTER EVERYTHING -->
 <script src="assets/logo.js"></script>
 ```
-**NOTE!** Want more speed? Now available on [cdnjs](https://cdnjs.com/libraries/strapdown-topbar)
+**NOTE!** Want more speed? Now available on [cdnjs](https://cdnjs.com/libraries/strapdown-topbar)  
+Or even [jsDelivr](https://www.jsdelivr.com): `https://cdn.jsdelivr.net/gh/joedf/strapdown-topbar@latest/assets/strapdown/strapdown-topbar.min.js`
