@@ -1,5 +1,5 @@
 # strapdown-topbar
-A topbar modification for [strapdown.js](http://strapdownjs.com/) (markdown-based webpages)  
+A topbar modification for [strapdown.js](https://github.com/arturadib/strapdown) (markdown-based webpages)  
 [![CDNJS](https://img.shields.io/cdnjs/v/strapdown-topbar.svg)](https://cdnjs.com/libraries/strapdown-topbar)
  [![mobile-ready](https://img.shields.io/badge/mobile-ready-blue.svg)](https://github.com/joedf/strapdown-topbar/releases/latest)
  
@@ -24,12 +24,12 @@ Have your topbar setting in the `<body>`.
 		<item><a href="#">Item #4</a></item>
 	</menu>
 	<toc>My TOC</toc>
-	<item><small>(Powered by <a href="http://strapdownjs.com/">StrapDown.js</a>)</small></item>
+	<item><small>(Powered by <a href="https://github.com/arturadib/strapdown">StrapDown.js</a>)</small></item>
 </topbar>
 ```
 Then, simply include `strapdown-topbar.js` **AFTER** `strapdown.js`.
 ```HTML
-<script src="http://strapdownjs.com/v/0.2/strapdown.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/arturadib/strapdown@gh-pages/v/0.2/strapdown.js"></script>
 <!-- Include it AFTER strapdown -->
 <script src="assets/strapdown/strapdown-topbar.min.js"></script>
 
