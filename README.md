@@ -37,5 +37,9 @@ Then, simply include `strapdown-topbar.js` **AFTER** `strapdown.js`.
 <!-- Include it AFTER EVERYTHING -->
 <script src="assets/logo.js"></script>
 ```
+Optionally, you can include the following before the js files to force a header text color to avoid link color styling when not hovered.
+```js
+var STRAPDOWN_TOPBAR_DEFAULT_COLOR = '#555';
+```
 **NOTE!** Want more speed? Now available on [cdnjs](https://cdnjs.com/libraries/strapdown-topbar)  
 Or even [jsDelivr](https://www.jsdelivr.com): `https://cdn.jsdelivr.net/gh/joedf/strapdown-topbar@latest/assets/strapdown/strapdown-topbar.min.js`

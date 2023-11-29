@@ -1,6 +1,6 @@
-﻿// strapdown-topbar.js v1.6.4
+﻿// strapdown-topbar.js v1.6.5
 // by Joe DF, Released under MIT License.
-// Revision date: 12:44 2016-07-14
+// Revision date: 02:06 2023-11-29
 
 // - ADDED menu toggling for Mobile devices
 // - FIXED Known issue : right-version is reversed
@@ -26,6 +26,8 @@
 // - FIXED (most) wide menus from going out of the screen on mobile
 // - ADDED Auto-ellipse text (@ 42 chars) in auto-generated Table of Contents
 // - FIXED Header anchor alignments for beyond h3+
+// - CHANGED to handle on-hover paragraph symbol with css instead of event handler
+// - CHANGED to not force text color for headers, unless STRAPDOWN_TOPBAR_DEFAULT_COLOR is defined.
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -214,18 +216,6 @@
 				anchor.appendChild(headers[j].cloneNode(true));
 				headers[j].parentNode.replaceChild(anchor,headers[j]);
 			
-			// Show paragraph sign on mouseover
-			headers[j].addEventListener('mouseenter', function(e){
-				var p = document.createElement('span');
-				p.innerHTML = ' &para;'; p.className = 'sd-para-symbol';
-				this.appendChild(p);
-			});
-			headers[j].addEventListener('mouseleave', function(e){
-				var p = document.getElementsByClassName('sd-para-symbol');
-				for (var k = 0; k < p.length; k++)
-					p[k].parentNode.removeChild(p[k]);
-			});
-			
 			// Add TOC elements
 			if (!!toc_c) {
 				toc_c.innerHTML = toc_c.innerHTML + '<li><a href="#'+anchorId+'">' + ellipse(innerText,42) + '</a></li>';
@@ -270,10 +260,12 @@
 		var css = document.createElement("style");
 		css.type = "text/css";
 		css.innerHTML = 'h1,h2,h3,h4,h5,h6{display:inline-block}'
-					  + 'a h1,a h2,a h3,a h4,a h5,a h6{color:#555}'
-					  + 'a h1:hover,a h2:hover,a h3:hover,a h4:hover,a h5:hover,a h6:hover{color:#D9230F}'
-					  + '.sd-para-symbol{color:#999;font-size:.7em;position:absolute}'
+					  + 'h1:hover:after,h2:hover:after,h3:hover:after,h4:hover:after,h5:hover:after,h6:hover:after{content:"\\00B6";opacity:0.6;font-size:.7em;position:absolute;}'
 					  + haligh_css;
+		if (typeof STRAPDOWN_TOPBAR_DEFAULT_COLOR == 'string') {
+			// use default not-hover header color if provided
+			css.innerHTML += 'a h1:not(:hover),a h2:not(:hover),a h3:not(:hover),a h4:not(:hover),a h5:not(:hover),a h6:not(:hover){color:'+STRAPDOWN_TOPBAR_DEFAULT_COLOR+'}';
+		}			
 		document.body.appendChild(css);
 	}
 })();
